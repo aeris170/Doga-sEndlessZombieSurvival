@@ -7,6 +7,9 @@ upgrades for the best score possible!
   * Endless singleplayer game.
   * AI with pathfinding.
   * Upgrade system(WIP).
+  
+## Dependancies: 
+  * [DoaEngine](https://github.com/aeris170/DoaEngine)
 
 ## Screenshots:
 ![dezs_1](https://user-images.githubusercontent.com/25724155/55691317-9c674400-59a5-11e9-97b1-59304b7d7e09.png)
