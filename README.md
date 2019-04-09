@@ -8,7 +8,7 @@ upgrades for the best score possible!
   * AI with pathfinding.
   * Upgrade system(WIP).
   
-## Dependancies: 
+## Dependencies: 
   * [DoaEngine](https://github.com/aeris170/DoaEngine)
 
 ## Screenshots:
