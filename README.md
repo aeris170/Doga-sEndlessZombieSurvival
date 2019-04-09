@@ -1,6 +1,6 @@
 # Doga's Endless Zombie Survival
 
-An endless zombie survival game. Survive by killing brain-eater zombies day after day and night after night, gaining **juicy $$$** in the process! Spend you money on various
+An endless top-down shooter zombie survival game. Survive by killing brain-eater zombies day after day and night after night, gaining **juicy $$$** in the process! Spend you money on various
 upgrades for the best score possible! 
 
 ## Features:
