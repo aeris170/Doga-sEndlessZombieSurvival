@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import com.doa.engine.DoaObject;
 import com.doa.engine.graphics.DoaGraphicsContext;
 import com.doa.engine.input.DoaMouse;
+import com.doa.engine.scene.DoaObject;
 
 import gameplay.EnemySpawner;
 import main.Main;
@@ -25,7 +25,8 @@ public class Shop extends DoaObject {
 	private static boolean visible = false;
 
 	public Shop() {
-		super(X, Y, SHOP_WIDTH, SHOP_HEIGHT, DoaObject.STATIC_FRONT);
+		super(X, Y, SHOP_WIDTH, SHOP_HEIGHT, 1);
+		setFixed(true);
 	}
 
 	public static void show() {

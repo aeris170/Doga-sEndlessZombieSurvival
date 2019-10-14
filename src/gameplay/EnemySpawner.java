@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.doa.engine.DoaHandler;
 import com.doa.engine.graphics.DoaGraphicsContext;
 import com.doa.engine.task.DoaTaskGuard;
 import com.doa.engine.task.DoaTasker;
 import com.doa.utils.DoaUtils;
 
 import ui.Shop;
+import util.Builders;
 
 public class EnemySpawner extends TypedGameObject {
 
@@ -39,7 +39,7 @@ public class EnemySpawner extends TypedGameObject {
 	public void tick() {
 		if (cooldownGuard.get() && EnemiesPresent < MAX_ALLOWED_ENEMY_AT_ONCE && EnemiesLeftToSpawn > 0) {
 			DoaTasker.guard(cooldownGuard, BASE_COOLDOWN_TIME + (ThreadLocalRandom.current().nextLong(4000)));
-			DoaHandler.instantiateDoaObject(Enemy.class, position.x, position.y, (int) (width * ENEMY_SIZE_FACTOR), (int) (height * ENEMY_SIZE_FACTOR), 50);
+			Collision.add(Builders.EB.args(position.x, position.y, (int) (width * ENEMY_SIZE_FACTOR), (int) (height * ENEMY_SIZE_FACTOR), 50).instantiate());
 			EnemiesPresent++;
 			EnemiesLeftToSpawn--;
 		} else if (EnemiesLeftInWave == 0 && cooldownGuard.get()) {

@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 
 import com.doa.engine.DoaCamera;
-import com.doa.engine.DoaHandler;
 import com.doa.engine.graphics.DoaGraphicsContext;
 import com.doa.engine.graphics.DoaSprites;
 import com.doa.engine.input.DoaKeyboard;
@@ -13,6 +12,8 @@ import com.doa.engine.input.DoaMouse;
 import com.doa.engine.task.DoaTaskGuard;
 import com.doa.engine.task.DoaTasker;
 import com.doa.maths.DoaVectorF;
+
+import util.Builders;
 
 public class Player extends TypedGameObject {
 
@@ -30,7 +31,7 @@ public class Player extends TypedGameObject {
 	private int score = 0;
 	private double angleRad = 0;
 
-	public Player(final Float x, final Float y) {
+	public Player(final float x, final float y) {
 		super(x, y);
 		super.type = ObjectType.PLAYER;
 		INSTANCE = this;
@@ -76,9 +77,8 @@ public class Player extends TypedGameObject {
 			final float mx = (float) (DoaMouse.X + DoaCamera.getX());
 			final float my = (float) (DoaMouse.Y + DoaCamera.getY());
 			DoaVectorF bulletStartingPosition = new DoaVectorF(position.x + width / 2f + bs.getWidth() / 2f, position.y + height / 2f + bs.getHeight() / 2f)
-			        .translate(-(position.x + width / 2f), -(position.y + height / 2f)).rotateRadians(angleRad)
-			        .translate(position.x + width / 2f, position.y + height / 2f);
-			DoaHandler.instantiateDoaObject(Bullet.class, bulletStartingPosition.x - bs.getWidth() / 2f, bulletStartingPosition.y - bs.getHeight() / 2f, mx, my);
+			        .translate(-(position.x + width / 2f), -(position.y + height / 2f)).rotateRadians(angleRad).translate(position.x + width / 2f, position.y + height / 2f);
+			Builders.BB.args(bulletStartingPosition.x - bs.getWidth() / 2f, bulletStartingPosition.y - bs.getHeight() / 2f, mx, my, bs).instantiate();
 		}
 
 		final TypedGameObject[] touchingEnemies = Collision.getCollidingObjects(this, ObjectType.ENEMY);

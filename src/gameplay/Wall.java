@@ -8,7 +8,7 @@ public class Wall extends TypedGameObject {
 
 	private static final long serialVersionUID = -1823772727435109215L;
 
-	public Wall(final Integer x, final Integer y) {
+	public Wall(final float x, final float y) {
 		super(x, y);
 		super.type = ObjectType.OBSTACLE;
 	}

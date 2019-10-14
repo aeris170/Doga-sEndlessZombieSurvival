@@ -5,14 +5,13 @@ import java.awt.Color;
 import javax.swing.SwingUtilities;
 
 import com.doa.engine.DoaEngine;
-import com.doa.engine.DoaHandler;
 import com.doa.engine.DoaWindow;
 import com.doa.engine.graphics.DoaLights;
 import com.doa.engine.graphics.DoaSprites;
+import com.doa.engine.scene.DoaSceneHandler;
 
 import gameplay.LevelLoader;
-import ui.HUD;
-import ui.Shop;
+import util.Builders;
 import util.Sprites;
 
 public class Main {
@@ -30,12 +29,14 @@ public class Main {
 		Sprites.initializeSprites();
 		DoaLights.ambientLight(new Color(100, 100, 200));
 
+		DoaSceneHandler.loadScene(DoaSceneHandler.createScene("gameScene"));
+
 		LevelLoader.loadLevel(DoaSprites.ORIGINAL_SPRITES.get("mapData"));
 
-		DoaHandler.instantiateDoaObject(Shop.class);
-		DoaHandler.instantiateDoaObject(HUD.class);
+		Builders.SB.instantiate();
+		Builders.HB.instantiate();
 
-		SwingUtilities.invokeLater(() -> configureGUI());
+		SwingUtilities.invokeLater(Main::configureGUI);
 	}
 
 	private static void configureGUI() {

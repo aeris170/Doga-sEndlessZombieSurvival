@@ -1,12 +1,13 @@
 package gameplay;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 
 import com.doa.engine.DoaCamera;
-import com.doa.engine.DoaHandler;
-import com.doa.engine.graphics.DoaSprite;
+import com.doa.engine.scene.DoaObject;
+import com.doa.engine.scene.DoaSceneHandler;
 
-import ui.Level;
+import util.Builders;
 
 public class LevelLoader {
 
@@ -15,8 +16,8 @@ public class LevelLoader {
 
 	private LevelLoader() {}
 
-	public static void loadLevel(final DoaSprite map) {
-		DoaHandler.clear();
+	public static void loadLevel(final BufferedImage map) {
+		DoaSceneHandler.getLoadedScene().clear();
 		final int w = map.getWidth();
 		final int h = map.getHeight();
 		for (int x = 0; x < w; x++) {
@@ -25,16 +26,22 @@ public class LevelLoader {
 				final int red = pixelColor.getRed();
 				final int green = pixelColor.getGreen();
 				final int blue = pixelColor.getBlue();
+				DoaObject o = null;
 				if (pixelColor.equals(Color.WHITE)) {
-					DoaHandler.instantiateDoaObject(Wall.class, x * BLOCK_WIDTH, y * BLOCK_HEIGHT);
+					o = Builders.WB.args((float) x * BLOCK_WIDTH, (float) y * BLOCK_HEIGHT).instantiate();
 				} else if (green == 255 && blue == 255) {
-					DoaHandler.instantiateDoaObject(Player.class, (float) x * BLOCK_WIDTH, (float) y * BLOCK_HEIGHT);
+					o = Builders.PB.args((float) x * BLOCK_WIDTH, (float) y * BLOCK_HEIGHT).instantiate();
 				} else if (red == 255 && blue == 255) {
-					DoaHandler.instantiateDoaObject(EnemySpawner.class, (float) x * BLOCK_WIDTH, (float) y * BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT);
+					o = Builders.ESB.args((float) x * BLOCK_WIDTH, (float) y * BLOCK_HEIGHT, BLOCK_WIDTH, BLOCK_HEIGHT).instantiate();
+				}
+				if (o != null) {
+					Collision.add(o);
 				}
 			}
 		}
-		DoaHandler.instantiateDoaObject(Level.class);
-		DoaCamera.adjustCamera(Player.getInstance(), 0, 0, map.getWidth() * BLOCK_WIDTH + BLOCK_WIDTH, map.getHeight() * BLOCK_HEIGHT + BLOCK_HEIGHT);
+		Builders.LB.instantiate();
+		DoaCamera.adjustCamera(Player.getInstance(), 0, 0, map.getWidth() * BLOCK_WIDTH, map.getHeight() * BLOCK_HEIGHT);
+		DoaCamera.setTweenAmountX(.01f);
+		DoaCamera.setTweenAmountY(.01f);
 	}
 }

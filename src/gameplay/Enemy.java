@@ -5,9 +5,9 @@ import java.awt.geom.AffineTransform;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.doa.engine.DoaHandler;
 import com.doa.engine.graphics.DoaGraphicsContext;
 import com.doa.engine.graphics.DoaSprites;
+import com.doa.engine.scene.DoaSceneHandler;
 import com.doa.maths.DoaVectorF;
 
 public class Enemy extends TypedGameObject {
@@ -60,7 +60,8 @@ public class Enemy extends TypedGameObject {
 		if (!touchedBullets.contains(b)) {
 			health -= Player.getInstance().getBulletSpecs().getDamage();
 			if (health < 0) {
-				DoaHandler.remove(this);
+				DoaSceneHandler.getLoadedScene().remove(this);
+				Collision.remove(this);
 				EnemySpawner.enemyDied();
 				Player.getInstance().setCoins(Player.getInstance().getCoins() + (int) Math.max(1, Math.ceil(EnemySpawner.getDifficulty() / Math.PI)));
 				Player.getInstance().setScore((int) (Player.getInstance().getScore() + EnemySpawner.getDifficulty() * Math.PI));

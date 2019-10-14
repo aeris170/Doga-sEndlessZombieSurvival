@@ -1,6 +1,6 @@
 package gameplay;
 
-import com.doa.engine.DoaObject;
+import com.doa.engine.scene.DoaObject;
 
 public abstract class TypedGameObject extends DoaObject {
 

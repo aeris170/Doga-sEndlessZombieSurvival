@@ -7,8 +7,8 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 
-import com.doa.engine.DoaObject;
 import com.doa.engine.graphics.DoaGraphicsContext;
+import com.doa.engine.scene.DoaObject;
 
 import gameplay.EnemySpawner;
 import gameplay.Player;
@@ -30,7 +30,8 @@ public class HUD extends DoaObject {
 	private static final String SCORE = "Score: ";
 
 	public HUD() {
-		super(0f, 0f, DoaObject.STATIC_FRONT);
+		super(0f, 0f, 1);
+		setFixed(true);
 	}
 
 	@Override
