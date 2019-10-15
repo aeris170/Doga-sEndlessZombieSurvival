@@ -6,6 +6,7 @@ import java.awt.geom.AffineTransform;
 
 import com.doa.engine.DoaCamera;
 import com.doa.engine.graphics.DoaGraphicsContext;
+import com.doa.engine.graphics.DoaLights;
 import com.doa.engine.graphics.DoaSprites;
 import com.doa.engine.input.DoaKeyboard;
 import com.doa.engine.input.DoaMouse;
@@ -85,6 +86,12 @@ public class Player extends TypedGameObject {
 		health -= touchingEnemies.length * 0.2;
 
 		angleRad = Math.atan2(DoaMouse.Y + DoaCamera.getY() - position.y, DoaMouse.X + DoaCamera.getX() - position.x);
+
+		if (DoaKeyboard.O) {
+			DoaLights.ambientLight(Color.WHITE);
+		} else if (DoaKeyboard.P) {
+			DoaLights.ambientLight(new Color(100, 100, 200));
+		}
 	}
 
 	@Override

@@ -1,12 +1,9 @@
 package main;
 
-import java.awt.Color;
-
 import javax.swing.SwingUtilities;
 
 import com.doa.engine.DoaEngine;
 import com.doa.engine.DoaWindow;
-import com.doa.engine.graphics.DoaLights;
 import com.doa.engine.graphics.DoaSprites;
 import com.doa.engine.scene.DoaSceneHandler;
 
@@ -27,7 +24,9 @@ public class Main {
 
 	public static void main(final String[] args) {
 		Sprites.initializeSprites();
-		DoaLights.ambientLight(new Color(100, 100, 200));
+
+		/* new Thread(() -> { for (int i = 255; i > 200; i--) { DoaLights.ambientLight(new Color(i - 55, i -
+		 * 55, i)); DoaUtils.sleepFor(500); } }).start(); */
 
 		DoaSceneHandler.loadScene(DoaSceneHandler.createScene("gameScene"));
 
